@@ -109,12 +109,15 @@ while True:
             algorithm = 'Merge sort' 
         size = int(input('Seleccione un tamaño de la sublista\n'))
         #print(len(catalog['videos']['elements']))
-        if size <= len(catalog['videos']['elements']):
+        '''if size <= len(catalog['videos']['elements']):
             tiempo_carga = controller.sortVideos(catalog, size, algorithm )
             print('El tiempo de carga del algoritmo '+ str(algorithm) + ' con '+ str(size) + ' datos es igual a: '+ str(tiempo_carga))
         elif size > len(catalog['videos']['elements']):
-            print('El tamaño de la sublista que escogio es mayor que el total de los datos.')
-
+            print('El tamaño de la sublista que escogio es mayor que el total de los datos.')'''
+        videos_sublist=controller.sortVideos(catalog, size, algorithm )['elements']
+        for video in videos_sublist:
+            print(video['title'])
+        #print()
 
 
 

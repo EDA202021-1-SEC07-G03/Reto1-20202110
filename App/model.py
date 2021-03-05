@@ -64,7 +64,7 @@ def addVideo(catalog, video):
 # Funciones para creacion de datos
 
 # Funciones de consulta
-def sortVideos(catalog, size, algorithm):
+def sortVideos_time(catalog, size, algorithm):
     sub_list = lt.subList(catalog['videos'], 0, size)
 
     
@@ -95,6 +95,24 @@ def sortVideos(catalog, size, algorithm):
     
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg
+
+def sortVideos(catalog, size, algorithm):
+    sub_list = lt.subList(catalog['videos'], 0, size)
+    if algorithm == 'Insertion sort':
+        sorted=ins.sort(sub_list, cmpVideosbyViews)
+
+    elif algorithm == 'Selection sort':
+        sorted=ses.sort(sub_list, cmpVideosbyViews)
+
+    elif algorithm == 'Shell sort':
+        sorted=shs.sort(sub_list, cmpVideosbyViews)
+    
+    elif algorithm == 'Merge sort':
+        sorted=mrg.sort(sub_list, cmpVideosbyViews)
+
+    elif algorithm == 'Quick sort':
+        sorted=qck.sort(sub_list, cmpVideosbyViews)
+    return sorted
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
