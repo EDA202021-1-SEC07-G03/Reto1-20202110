@@ -42,10 +42,11 @@ los mismos.
 """
 
 # Construccion de modelos
-def newCatalog(tipo):
+def newCatalog():
    
-    catalog = {'videos': lt.newList(tipo)
+    catalog = {'videos': lt.newList('ARRAY_LIST'), 'category': lt.newList('ARRAY_LIST')
                }
+    
 
     
     
@@ -57,6 +58,10 @@ def newCatalog(tipo):
 def addVideo(catalog, video):
     
     lt.addLast(catalog['videos'], video)
+
+def addCategory(catalog, category):
+    
+    lt.addLast(catalog['category'], category)
     
 
     
@@ -64,57 +69,9 @@ def addVideo(catalog, video):
 # Funciones para creacion de datos
 
 # Funciones de consulta
-def sortVideos_time(catalog, size, algorithm):
-    sub_list = lt.subList(catalog['videos'], 0, size)
 
-    
-    if algorithm == 'Insertion sort':
-        start_time = time.process_time()
-        ins.sort(sub_list, cmpVideosbyViews)
-        stop_time = time.process_time()
 
-    elif algorithm == 'Selection sort':
-        start_time = time.process_time()
-        ses.sort(sub_list, cmpVideosbyViews)
-        stop_time = time.process_time()
 
-    elif algorithm == 'Shell sort':
-        start_time = time.process_time()
-        shs.sort(sub_list, cmpVideosbyViews)
-        stop_time = time.process_time()
-    
-    elif algorithm == 'Merge sort':
-        start_time = time.process_time()
-        mrg.sort(sub_list, cmpVideosbyViews)
-        stop_time = time.process_time()
-
-    elif algorithm == 'Quick sort':
-        start_time = time.process_time()
-        qck.sort(sub_list, cmpVideosbyViews)
-        stop_time = time.process_time()
-    
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg
-
-def sortVideos(catalog, size, algorithm):
-    sub_list = lt.subList(catalog['videos'], 0, size)
-    if algorithm == 'Insertion sort':
-        sorted=ins.sort(sub_list, cmpVideosbyViews)
-
-    elif algorithm == 'Selection sort':
-        sorted=ses.sort(sub_list, cmpVideosbyViews)
-
-    elif algorithm == 'Shell sort':
-        sorted=shs.sort(sub_list, cmpVideosbyViews)
-    
-    elif algorithm == 'Merge sort':
-        sorted=mrg.sort(sub_list, cmpVideosbyViews)
-
-    elif algorithm == 'Quick sort':
-        sorted=qck.sort(sub_list, cmpVideosbyViews)
-    return sorted
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
-def cmpVideosbyViews(video1,video2):
-    return(video1["views"]<video2["views"])

@@ -41,18 +41,13 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Selección algorítmo de ordenamiento")
- 
-def printOptions():
-    print('1- ARRAY_LIST')
-    print('2- LINKED_LIST')
+    print("2- Videos tendencia por país y categoría")
+    print("3- Video trending por país")
+    print("4- Video trending por categoría")
+    print("5- Videos con más likes por país y tag")
 
-def printOptions2():
-    print('1- Insertion Sort')
-    print('2- Selection Sort')
-    print('3- Shell Sort')
-    print('4- Quick Sort')
-    print('5- Merge Sort')
+
+
 
 
 
@@ -60,9 +55,9 @@ def printOptions2():
 Menu principal
 """
 
-def initCatalog(tipo):
+def initCatalog():
 
-    return controller.initCatalog(tipo)
+    return controller.initCatalog()
 
 
 def loadData(catalog):
@@ -73,51 +68,28 @@ catalog = None
 
 
 while True:
-    tipo= 'ARRAY_LIST'
-    algorithm = 'a'
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs) == 1:
-        printOptions()
-        inputs1=input('Seleccione un tipo para la representación de las listas:\n')
-        if int(inputs1)==1:
-            tipo='ARRAY_LIST'
-        elif inputs1==2:
-            tipo='LINKED_LIST'
         print("Cargando información de los archivos ....")
-        
-        catalog = initCatalog(tipo)
+        catalog = initCatalog()
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+        #Primer video cargado
+        print('Title: '+ catalog['videos']['elements'][0]['title'])
+        print('Channel title: '+ catalog['videos']['elements'][0]['channel_title'])
+        print('Trending date: '+ catalog['videos']['elements'][0]['trending_date'])
+        print('Country: '+ catalog['videos']['elements'][0]['country'])
+        print('Views: '+ catalog['videos']['elements'][0]['views'])
+        print('Likes: '+ catalog['videos']['elements'][0]['likes'])
+        print('Dislikes: '+ catalog['videos']['elements'][0]['dislikes'])
+        #Categorias
+        print(catalog['category']['elements'])
         
         
 
-
-    elif int(inputs) == 2:
-        printOptions2()
-        inputs2=int(input('Seleccione un tipo para el algorítmo de ordenamiento\n'))
-
-        if inputs2 == 1:
-            algorithm = 'Insertion sort'
-        elif inputs2 == 2:
-            algorithm = 'Selection sort'
-        elif inputs2 == 3:
-            algorithm = 'Shell sort'
-        elif inputs2 == 4:
-            algorithm = 'Quick sort'
-        elif inputs2 == 5:
-            algorithm = 'Merge sort' 
-        size = int(input('Seleccione un tamaño de la sublista\n'))
-        #print(len(catalog['videos']['elements']))
-        '''if size <= len(catalog['videos']['elements']):
-            tiempo_carga = controller.sortVideos(catalog, size, algorithm )
-            print('El tiempo de carga del algoritmo '+ str(algorithm) + ' con '+ str(size) + ' datos es igual a: '+ str(tiempo_carga))
-        elif size > len(catalog['videos']['elements']):
-            print('El tamaño de la sublista que escogio es mayor que el total de los datos.')'''
-        videos_sublist=controller.sortVideos(catalog, size, algorithm )['elements']
-        for video in videos_sublist:
-            print(video['title'])
-        #print()
+    elif int(inputs[0]) == 2:
+        pass
 
 
 
