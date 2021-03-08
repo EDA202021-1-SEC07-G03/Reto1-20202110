@@ -107,7 +107,7 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
 
 
 def videos_pais_tag(catalog,pais2,tag,cantidad):
-    i=1
+    i=0
     titles=[]
     sub_list= mrg.sort(catalog['videos'],cmpVideosbyViews)
     sub_list = sub_list.copy()
