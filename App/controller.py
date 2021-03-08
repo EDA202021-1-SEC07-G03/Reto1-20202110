@@ -76,3 +76,7 @@ def loadCategory(catalog):
 def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     subsub_list= model.videos_pais_categoria(catalog,pais,nombre_categoria,n)
     return subsub_list
+
+def videos_pais_tag(catalog,pais2,tag,cantidad):
+    subsub_list= model.videos_pais_tag(catalog,pais2,tag,cantidad)
+    return subsub_list

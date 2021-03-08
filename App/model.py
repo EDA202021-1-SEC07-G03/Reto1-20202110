@@ -106,6 +106,30 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     return subsub_list
 
 
+def videos_pais_tag(catalog,pais2,tag,cantidad):
+    i=1
+    sub_list=lt.newList('ARRAY_LIST')
+    while i <  (lt.size(catalog['videos'])):
+        str_tags= catalog['videos']['elements'][i]['tags']
+        str_tags_clean= str_tags.replace('"','')
+        list_tags=str_tags_clean.split('|')
+        if (pais2 in ((catalog['videos']['elements'][i]['country']).lower())) and (tag in list_tags):
+            lt.addLast(sub_list, catalog['videos']['elements'][i])
+        i+=1
+
+    sub_list = sub_list.copy()
+    mrg.sort(sub_list,cmpVideosbyLikes)
+    subsub_list = lt.subList(sub_list, 1, cantidad)
+    subsub_list = subsub_list.copy()
+    return subsub_list
+
+
+
+
+
 # Funciones de ordenamiento
 def cmpVideosbyViews(video1,video2):
     return(int(video1["views"])>int(video2["views"]))
+
+def cmpVideosbyLikes(video1,video2):
+    return(int(video1["likes"])>int(video2["likes"]))
