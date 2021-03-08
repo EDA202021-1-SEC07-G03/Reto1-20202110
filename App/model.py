@@ -72,8 +72,9 @@ def nombre_id_categoria(catalog,nombre_categoria):
     while i <= (lt.size(catalog['category'])-1):
         if nombre_categoria in ((catalog['category']['elements'][i]['name']).lower()):
             id_categoria= catalog['category']['elements'][i]['id']
+            return id_categoria
         i+=1
-    return id_categoria
+    
     
 
 
