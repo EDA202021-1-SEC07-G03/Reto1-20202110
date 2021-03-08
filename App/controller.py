@@ -55,7 +55,7 @@ def loadData(catalog):
     
 def loadVideos(catalog):
    
-    vidsfile = cf.data_dir + 'videos-test.csv'
+    vidsfile = cf.data_dir + 'videos-large.csv'
     input_file1 = csv.DictReader(open(vidsfile, encoding='utf-8'))
     for video in input_file1:
         model.addVideo(catalog, video)
@@ -72,3 +72,7 @@ def loadCategory(catalog):
 
 
 # Funciones de consulta sobre el catálogo
+
+def videos_pais_categoria(catalog,pais,nombre_categoria,n):
+    subsub_list= model.videos_pais_categoria(catalog,pais,nombre_categoria,n)
+    return subsub_list

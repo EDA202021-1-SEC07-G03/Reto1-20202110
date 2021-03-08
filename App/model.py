@@ -67,6 +67,16 @@ def addCategory(catalog, category):
     
 
 # Funciones para creacion de datos
+def nombre_id_categoria(catalog,nombre_categoria):
+    i=0
+    while i <= (lt.size(catalog['category'])-1):
+        if nombre_categoria in ((catalog['category']['elements'][i]['name']).lower()):
+            id_categoria= catalog['category']['elements'][i]['id']
+        i+=1
+    return id_categoria
+    
+
+
 
 # Funciones de consulta
 
@@ -74,4 +84,27 @@ def addCategory(catalog, category):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
+def videos_pais_categoria(catalog,pais,nombre_categoria,n):
+ 
+    
+    id_categoria = nombre_id_categoria(catalog,nombre_categoria)
+    
+
+  
+    sub_list=lt.newList('ARRAY_LIST')
+    j=1
+    while j <  (lt.size(catalog['videos'])):
+        if (pais in ((catalog['videos']['elements'][j]['country']).lower())) and (id_categoria in (catalog['videos']['elements'][j]['category_id'])):
+            lt.addLast(sub_list, catalog['videos']['elements'][j])
+        j+=1
+
+    sub_list = sub_list.copy()
+    mrg.sort(sub_list,cmpVideosbyViews)
+    subsub_list = lt.subList(sub_list, 1, n)
+    subsub_list = subsub_list.copy()
+    return subsub_list
+
+
 # Funciones de ordenamiento
+def cmpVideosbyViews(video1,video2):
+    return(int(video1["views"])>int(video2["views"]))

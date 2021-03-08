@@ -51,6 +51,8 @@ def printMenu():
 
 
 
+
+
 """
 Menu principal
 """
@@ -87,9 +89,31 @@ while True:
         print(catalog['category']['elements'])
         
         
+        
+        
+        
 
-    elif int(inputs[0]) == 2:
-        pass
+    elif int(inputs)==2:
+        pais=(str(input('Digite el pais de su interes: ')).lower())
+        nombre_categoria=(str(input('Digite la categoria de su interes: ')).lower())
+        n= int(input('Indique la cantidad de videos que desea recibir: '))
+        subsub_list= controller.videos_pais_categoria(catalog,pais,nombre_categoria,n)
+        i=0
+        while i < (lt.size(subsub_list)):
+            print('VIDEO ' +str(i+1)+ ' : '+('Trending date: '+ str(subsub_list['elements'][i]['trending_date']))+
+            ' , Title: '+ str(subsub_list['elements'][i]['title'])+
+            ' , Channel title: ' + str(subsub_list['elements'][i]['channel_title'])+ 
+            ' , Publish time: ' + str(subsub_list['elements'][i]['publish_time'])+ 
+            ' , Views: ' + str(subsub_list['elements'][i]['views'])+
+            ' , Likes: '+ str(subsub_list['elements'][i]['likes'])+
+            ' , Dislikes: '+ str(subsub_list['elements'][i]['dislikes']))
+            i+=1
+
+        
+            
+
+        
+        
 
 
 
