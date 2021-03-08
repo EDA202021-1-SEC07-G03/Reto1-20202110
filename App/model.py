@@ -108,6 +108,7 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
 
 def videos_pais_tag(catalog,pais2,tag,cantidad):
     i=1
+    titles=[]
     sub_list=lt.newList('ARRAY_LIST')
     while i <  (lt.size(catalog['videos'])):
         
@@ -120,8 +121,9 @@ def videos_pais_tag(catalog,pais2,tag,cantidad):
         list_tags1=str_tags_clean1.split('|')
         list_tags2=str_tags_clean2.split()
         list_tags3 = list_tags1 + list_tags2
-        if  (pais2 in ((catalog['videos']['elements'][i]['country']).lower())) and (tag in list_tags3):
+        if  (pais2 in ((catalog['videos']['elements'][i]['country']).lower())) and (tag in list_tags3) and ((catalog['videos']['elements'][i]['title']) not in titles):
             lt.addLast(sub_list, catalog['videos']['elements'][i])
+            titles.append(catalog['videos']['elements'][i]['title'])
         
         i+=1
 
