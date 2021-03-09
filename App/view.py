@@ -118,6 +118,16 @@ while True:
            n+=info.title()+': '+str(trend[info])+', '
         print(n[:-2]) 
         pass
+        str_tags= catalog['videos']['elements'][50]['tags']
+        str_tags_clean1= str_tags.replace('"','')
+        str_tags_clean2= str_tags_clean1.replace('|',' ')
+        
+
+        list_tags1=str_tags_clean1.split('|')
+        list_tags2=str_tags_clean2.split()
+        list_tags3 = list_tags1 + list_tags2
+        
+        print(list_tags3)
 
 
 
@@ -134,7 +144,7 @@ while True:
         i=0
         while i < (lt.size(subsub_list)):
             print('VIDEO ' +str(i+1)+ ' : '+
-            (' , Title: '+ str(subsub_list['elements'][i]['title'])+
+            ('Title: '+ str(subsub_list['elements'][i]['title'])+
             ' , Channel title: ' + str(subsub_list['elements'][i]['channel_title'])+ 
             ' , Publish time: ' + str(subsub_list['elements'][i]['publish_time'])+ 
             ' , Views: ' + str(subsub_list['elements'][i]['views'])+

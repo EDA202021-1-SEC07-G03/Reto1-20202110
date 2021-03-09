@@ -129,20 +129,34 @@ def videos_tendencia_pais(catalog,pais):
 
 
 def videos_pais_tag(catalog,pais2,tag,cantidad):
-    i=1
-    sub_list=lt.newList('ARRAY_LIST')
-    while i <  (lt.size(catalog['videos'])):
-        str_tags= catalog['videos']['elements'][i]['tags']
-        str_tags_clean= str_tags.replace('"','')
-        list_tags=str_tags_clean.split('|')
-        if (pais2 in ((catalog['videos']['elements'][i]['country']).lower())) and (tag in list_tags):
-            lt.addLast(sub_list, catalog['videos']['elements'][i])
+    i=0
+    titles=[]
+    sub_list= mrg.sort(catalog['videos'],cmpVideosbyViews)
+    sub_list = sub_list.copy()
+
+    subsub_list=lt.newList('ARRAY_LIST')
+    while i <  (lt.size(sub_list)):
+        
+        str_tags= sub_list['elements'][i]['tags']
+        str_tags_clean1= str_tags.replace('"','')
+        str_tags_clean1= str_tags_clean1.replace('(','')
+        str_tags_clean1= str_tags_clean1.replace(')','')
+        str_tags_clean2= str_tags_clean1.replace('|',' ')
+
+        list_tags1=str_tags_clean1.split('|')
+        list_tags2=str_tags_clean2.split()
+        list_tags3 = list_tags1 + list_tags2
+        if  (pais2 in ((sub_list['elements'][i]['country']).lower())) and (tag in list_tags3) and ((sub_list['elements'][i]['title']) not in titles):
+            lt.addLast(subsub_list, sub_list['elements'][i])
+            titles.append(sub_list['elements'][i]['title'])
+        
         i+=1
 
-    sub_list = sub_list.copy()
-    mrg.sort(sub_list,cmpVideosbyLikes)
-    subsub_list = lt.subList(sub_list, 1, cantidad)
+    subsub_list = lt.subList(subsub_list, 1, cantidad)
     subsub_list = subsub_list.copy()
+
+   
+
     return subsub_list
 
 
