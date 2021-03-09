@@ -86,16 +86,11 @@ def nombre_id_categoria(catalog,nombre_categoria):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def videos_pais_categoria(catalog,pais,nombre_categoria,n):
- 
-    
     id_categoria = nombre_id_categoria(catalog,nombre_categoria)
-    
-
-  
     sub_list=lt.newList('ARRAY_LIST')
     j=1
     while j <  (lt.size(catalog['videos'])):
-        if (pais in ((catalog['videos']['elements'][j]['country']).lower())) and (id_categoria in (catalog['videos']['elements'][j]['category_id'])):
+        if (pais in (lt.getElement(catalog['videos'], j)['country'].lower())) and (id_categoria in (lt.getElement(catalog['videos'], j)['category_id'].lower())):
             lt.addLast(sub_list, catalog['videos']['elements'][j])
         j+=1
 
@@ -104,6 +99,33 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     subsub_list = lt.subList(sub_list, 1, n)
     subsub_list = subsub_list.copy()
     return subsub_list
+def videos_tendencia_pais(catalog,pais):
+    sub_list=lt.newList('ARRAY_LIST')
+    dates={}
+    trend={}
+    mayor=0
+    for j in range(lt.size(catalog['videos'])):
+        titulo=(lt.getElement(catalog['videos'], j)['title'])
+        date=(lt.getElement(catalog['videos'], j)['trending_date'])
+        channel=(lt.getElement(catalog['videos'], j)['channel_title'])
+        country=(lt.getElement(catalog['videos'], j)['country'])
+        if pais in (lt.getElement(catalog['videos'], j)['country'].lower()):
+            info=titulo+';;'+channel+';;'+country
+            if dates.get(info)==None:
+                dates[info]=lt.newList('ARRAY_LIST')
+                lt.addLast(dates[info],date)
+            else:
+                lt.addLast(dates[titulo+';;'+channel+';;'+country],date)
+        
+    for info in dates:
+        if lt.size(dates[info])>mayor:
+            mayor=lt.size(dates[info])
+            i=info.split(';;')
+            trend['title']=i[0]
+            trend['channel']=i[1]
+            trend['country']=i[2]
+            trend['days']=mayor
+    return trend
 
 
 def videos_pais_tag(catalog,pais2,tag,cantidad):

@@ -111,6 +111,12 @@ while True:
         
     
     elif int(inputs)==3:
+        pais=(str(input('Digite el pais de su interes: ')).lower())
+        trend=controller.videos_tendencia_pais(catalog,pais)
+        n=''
+        for info in trend:
+           n+=info.title()+': '+str(trend[info])+', '
+        print(n[:-2]) 
         pass
 
 
