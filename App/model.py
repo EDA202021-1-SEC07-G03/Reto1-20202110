@@ -70,8 +70,8 @@ def addCategory(catalog, category):
 def nombre_id_categoria(catalog,nombre_categoria):
     i=0
     while i <= (lt.size(catalog['category'])-1):
-        if nombre_categoria in ((catalog['category']['elements'][i]['name']).lower()):
-            id_categoria= catalog['category']['elements'][i]['id']
+        if nombre_categoria in ((lt.getElement(catalog['category'], i)['name']).lower()):
+            id_categoria= lt.getElement(catalog['category'], i)['id']
             return id_categoria
         i+=1
     
@@ -91,7 +91,7 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     j=1
     while j <  (lt.size(catalog['videos'])):
         if (pais in (lt.getElement(catalog['videos'], j)['country'].lower())) and (id_categoria in (lt.getElement(catalog['videos'], j)['category_id'].lower())):
-            lt.addLast(sub_list, catalog['videos']['elements'][j])
+            lt.addLast(sub_list, lt.getElement(catalog['videos'], j))
         j+=1
 
     sub_list = sub_list.copy()
@@ -109,14 +109,15 @@ def videos_tendencia_pais(catalog,pais):
         date=(lt.getElement(catalog['videos'], j)['trending_date'])
         channel=(lt.getElement(catalog['videos'], j)['channel_title'])
         country=(lt.getElement(catalog['videos'], j)['country'])
-        if pais in (lt.getElement(catalog['videos'], j)['country'].lower()):
+        if pais.lower() in country.lower():
             info=titulo+';;'+channel+';;'+country
             if dates.get(info)==None:
                 dates[info]=lt.newList('ARRAY_LIST')
                 lt.addLast(dates[info],date)
             else:
                 lt.addLast(dates[titulo+';;'+channel+';;'+country],date)
-        
+            if 'Marvel' in channel:
+                print(lt.getElement(catalog['videos'], j)
     for info in dates:
         if lt.size(dates[info])>mayor:
             mayor=lt.size(dates[info])
@@ -137,7 +138,7 @@ def videos_pais_tag(catalog,pais2,tag,cantidad):
     subsub_list=lt.newList('ARRAY_LIST')
     while i <  (lt.size(sub_list)):
         
-        str_tags= sub_list['elements'][i]['tags']
+        str_tags= lt.getElement(sub_list, i)['tags']
         str_tags_clean1= str_tags.replace('"','')
         str_tags_clean1= str_tags_clean1.replace('(','')
         str_tags_clean1= str_tags_clean1.replace(')','')
@@ -146,9 +147,9 @@ def videos_pais_tag(catalog,pais2,tag,cantidad):
         list_tags1=str_tags_clean1.split('|')
         list_tags2=str_tags_clean2.split()
         list_tags3 = list_tags1 + list_tags2
-        if  (pais2 in ((sub_list['elements'][i]['country']).lower())) and (tag in list_tags3) and ((sub_list['elements'][i]['title']) not in titles):
-            lt.addLast(subsub_list, sub_list['elements'][i])
-            titles.append(sub_list['elements'][i]['title'])
+        if  (pais2 in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and (lt.getElement(sub_list, i)['title']) not in titles:
+            lt.addLast(subsub_list, lt.getElement(sub_list, i))
+            titles.append(lt.getElement(sub_list, i)['title'])
         
         i+=1
 

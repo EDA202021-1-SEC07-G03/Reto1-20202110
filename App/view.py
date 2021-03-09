@@ -118,6 +118,7 @@ while True:
            n+=info.title()+': '+str(trend[info])+', '
         print(n[:-2]) 
         pass
+        '''
         str_tags= catalog['videos']['elements'][50]['tags']
         str_tags_clean1= str_tags.replace('"','')
         str_tags_clean2= str_tags_clean1.replace('|',' ')
@@ -128,7 +129,7 @@ while True:
         list_tags3 = list_tags1 + list_tags2
         
         print(list_tags3)
-
+        '''
 
 
     elif int(inputs)==4:
