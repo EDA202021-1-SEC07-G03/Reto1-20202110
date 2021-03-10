@@ -133,6 +133,12 @@ while True:
 
 
     elif int(inputs)==4:
+        nombre_categoria=(str(input('Digite la categoria de su interes: ')).lower())
+        trend=controller.videos_tendencia_categoria(catalog,nombre_categoria)
+        n=''
+        for info in trend:
+           n+=info.title()+': '+str(trend[info])+', '
+        print(n[:-2]) 
         pass
 
 

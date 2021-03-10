@@ -97,13 +97,11 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     sub_list = sub_list.copy()
     mrg.sort(sub_list,cmpVideosbyViews)
     subsub_list = lt.subList(sub_list, 1, n)
-    subsub_list = subsub_list.copy()
     return subsub_list
 def videos_tendencia_pais(catalog,pais):
-    sub_list=lt.newList('ARRAY_LIST')
     dates={}
     trend={}
-    mayor=0
+    mayor=-1
     for j in range(1,lt.size(catalog['videos'])+1):
         titulo=(lt.getElement(catalog['videos'], j)['title'])
         date=(lt.getElement(catalog['videos'], j)['trending_date'])
@@ -129,10 +127,31 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
     id_categoria = nombre_id_categoria(catalog,nombre_categoria)
     sub_list=lt.newList('ARRAY_LIST')
     j=1
+    dates={}
+    trend={}
+    mayor=-1
     while j <  (lt.size(catalog['videos'])):
-        if id_categoria in (lt.getElement(catalog['videos'], j)['category_id']):
+        if id_categoria == (lt.getElement(catalog['videos'], j)['category_id']):
+            titulo=(lt.getElement(catalog['videos'], j)['title'])
+            date=(lt.getElement(catalog['videos'], j)['trending_date'])
+            channel=(lt.getElement(catalog['videos'], j)['channel_title'])
             lt.addLast(sub_list, lt.getElement(catalog['videos'], j))
+            info=titulo+';;'+channel+';;'+id_categoria
+            if dates.get(info)==None:
+                dates[info]=lt.newList('ARRAY_LIST')
+                lt.addLast(dates[info],date)
+            else:
+                lt.addLast(dates[titulo+';;'+channel+';;'+id_categoria],date)
         j+=1
+    for info in dates:
+        if lt.size(dates[info])>mayor:
+            mayor=lt.size(dates[info])
+            i=info.split(';;')
+            trend['title']=i[0]
+            trend['channel']=i[1]
+            trend['country']=i[2]
+            trend['days']=mayor
+    return trend
 def videos_pais_tag(catalog,pais2,tag,cantidad):
     i=0
     titles=[]
