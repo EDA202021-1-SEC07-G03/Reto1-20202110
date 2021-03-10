@@ -90,7 +90,7 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     sub_list=lt.newList('ARRAY_LIST')
     j=1
     while j <  (lt.size(catalog['videos'])):
-        if (pais in (lt.getElement(catalog['videos'], j)['country'].lower())) and (id_categoria in (lt.getElement(catalog['videos'], j)['category_id'].lower())):
+        if (pais in (lt.getElement(catalog['videos'], j)['country'].lower())) and (id_categoria in (lt.getElement(catalog['videos'], j)['category_id'])):
             lt.addLast(sub_list, lt.getElement(catalog['videos'], j))
         j+=1
 
@@ -104,7 +104,7 @@ def videos_tendencia_pais(catalog,pais):
     dates={}
     trend={}
     mayor=0
-    for j in range(lt.size(catalog['videos'])):
+    for j in range(1,lt.size(catalog['videos'])+1):
         titulo=(lt.getElement(catalog['videos'], j)['title'])
         date=(lt.getElement(catalog['videos'], j)['trending_date'])
         channel=(lt.getElement(catalog['videos'], j)['channel_title'])
@@ -116,8 +116,6 @@ def videos_tendencia_pais(catalog,pais):
                 lt.addLast(dates[info],date)
             else:
                 lt.addLast(dates[titulo+';;'+channel+';;'+country],date)
-            if 'Marvel' in channel:
-                print(lt.getElement(catalog['videos'], j)
     for info in dates:
         if lt.size(dates[info])>mayor:
             mayor=lt.size(dates[info])
@@ -127,8 +125,14 @@ def videos_tendencia_pais(catalog,pais):
             trend['country']=i[2]
             trend['days']=mayor
     return trend
-
-
+def videos_tendencia_categoria (catalog, nombre_categoria):
+    id_categoria = nombre_id_categoria(catalog,nombre_categoria)
+    sub_list=lt.newList('ARRAY_LIST')
+    j=1
+    while j <  (lt.size(catalog['videos'])):
+        if id_categoria in (lt.getElement(catalog['videos'], j)['category_id']):
+            lt.addLast(sub_list, lt.getElement(catalog['videos'], j))
+        j+=1
 def videos_pais_tag(catalog,pais2,tag,cantidad):
     i=0
     titles=[]
