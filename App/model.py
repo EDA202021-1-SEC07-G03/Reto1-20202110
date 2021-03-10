@@ -102,7 +102,8 @@ def videos_tendencia_pais(catalog,pais):
     dates={}
     trend={}
     mayor=-1
-    for j in range(1,lt.size(catalog['videos'])+1):
+    j=1
+    while j <  (lt.size(catalog['videos'])):
         titulo=(lt.getElement(catalog['videos'], j)['title'])
         date=(lt.getElement(catalog['videos'], j)['trending_date'])
         channel=(lt.getElement(catalog['videos'], j)['channel_title'])
@@ -114,6 +115,7 @@ def videos_tendencia_pais(catalog,pais):
                 lt.addLast(dates[info],date)
             else:
                 lt.addLast(dates[titulo+';;'+channel+';;'+country],date)
+        j+=1
     for info in dates:
         if lt.size(dates[info])>mayor:
             mayor=lt.size(dates[info])
@@ -125,7 +127,6 @@ def videos_tendencia_pais(catalog,pais):
     return trend
 def videos_tendencia_categoria (catalog, nombre_categoria):
     id_categoria = nombre_id_categoria(catalog,nombre_categoria)
-    sub_list=lt.newList('ARRAY_LIST')
     j=1
     dates={}
     trend={}
@@ -135,7 +136,6 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
             titulo=(lt.getElement(catalog['videos'], j)['title'])
             date=(lt.getElement(catalog['videos'], j)['trending_date'])
             channel=(lt.getElement(catalog['videos'], j)['channel_title'])
-            lt.addLast(sub_list, lt.getElement(catalog['videos'], j))
             info=titulo+';;'+channel+';;'+id_categoria
             if dates.get(info)==None:
                 dates[info]=lt.newList('ARRAY_LIST')
@@ -149,13 +149,13 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
             i=info.split(';;')
             trend['title']=i[0]
             trend['channel']=i[1]
-            trend['country']=i[2]
+            trend['category id']=i[2]
             trend['days']=mayor
     return trend
 def videos_pais_tag(catalog,pais2,tag,cantidad):
     i=0
     titles=[]
-    sub_list= mrg.sort(catalog['videos'],cmpVideosbyViews)
+    sub_list= mrg.sort(catalog['videos'],cmpVideosbyLikes)
     sub_list = sub_list.copy()
 
     subsub_list=lt.newList('ARRAY_LIST')
