@@ -44,28 +44,17 @@ los mismos.
 # Construccion de modelos
 def newCatalog():
    
-    catalog = {'videos': lt.newList('ARRAY_LIST'), 'category': lt.newList('ARRAY_LIST')
-               }
-    
-
-    
-    
-
+    catalog = {'videos': lt.newList('ARRAY_LIST'), 'category': lt.newList('ARRAY_LIST')}
     return catalog
 
 
 # Funciones para agregar informacion al catalogo
 def addVideo(catalog, video):
-    
     lt.addLast(catalog['videos'], video)
 
 def addCategory(catalog, category):
-    
     lt.addLast(catalog['category'], category)
     
-
-    
-
 # Funciones para creacion de datos
 def nombre_id_categoria(catalog,nombre_categoria):
     i=0
@@ -75,16 +64,7 @@ def nombre_id_categoria(catalog,nombre_categoria):
             return id_categoria
         i+=1
     
-    
-
-
-
 # Funciones de consulta
-
-
-
-# Funciones utilizadas para comparar elementos dentro de una lista
-
 def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     id_categoria = nombre_id_categoria(catalog,nombre_categoria)
     sub_list=lt.newList('ARRAY_LIST')
@@ -179,11 +159,7 @@ def videos_pais_tag(catalog,pais,tag,cantidad):
     subsub_list = subsub_list.copy()
     return subsub_list
 
-
-
-
-
-# Funciones de ordenamiento
+# Funciones de comparacion
 def cmpVideosbyViews(video1,video2):
     return(int(video1["views"])>int(video2["views"]))
 

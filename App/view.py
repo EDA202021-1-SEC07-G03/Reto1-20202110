@@ -45,25 +45,17 @@ def printMenu():
     print("3- Video trending por país")
     print("4- Video trending por categoría")
     print("5- Videos con más likes por país y tag")
-
-
-
-
-
-
-
+    print("6- Salir")
 
 """
 Menu principal
 """
 
 def initCatalog():
-
     return controller.initCatalog()
 
 
 def loadData(catalog):
-
     controller.loadData(catalog)
 catalog = None
 
@@ -88,11 +80,6 @@ while True:
         #Categorias
         print(catalog['category']['elements'])
         
-        
-        
-        
-        
-
     elif int(inputs)==2:
         pais=(str(input('Digite el pais de su interes: ')).lower())
         nombre_categoria=(str(input('Digite la categoria de su interes: ')).lower())
@@ -109,7 +96,6 @@ while True:
             ' , Dislikes: '+ str(subsub_list['elements'][i]['dislikes']))
             i+=1
         
-    
     elif int(inputs)==3:
         pais=(str(input('Digite el pais de su interes: ')).lower())
         trend=controller.videos_tendencia_pais(catalog,pais)
@@ -118,20 +104,7 @@ while True:
            n+=info.title()+': '+str(trend[info])+', '
         print(n[:-2]) 
         pass
-        '''
-        str_tags= catalog['videos']['elements'][50]['tags']
-        str_tags_clean1= str_tags.replace('"','')
-        str_tags_clean2= str_tags_clean1.replace('|',' ')
         
-
-        list_tags1=str_tags_clean1.split('|')
-        list_tags2=str_tags_clean2.split()
-        list_tags3 = list_tags1 + list_tags2
-        
-        print(list_tags3)
-        '''
-
-
     elif int(inputs)==4:
         nombre_categoria=(str(input('Digite la categoria de su interes: ')).lower())
         trend=controller.videos_tendencia_categoria(catalog,nombre_categoria)
@@ -140,8 +113,6 @@ while True:
            n+=info.title()+': '+str(trend[info])+', '
         print(n[:-2]) 
         pass
-
-
 
     elif int(inputs)==5:
         pais=(str(input('Digite el pais de su interes: ')).lower())
@@ -159,14 +130,6 @@ while True:
             ' , Dislikes: '+ str(lt.getElement(subsub_list,i)['dislikes'])+
             ' , Tags: '+str(lt.getElement(subsub_list,i)['tags'])))
             i+=1
-
-        
-            
-
-        
-        
-
-
 
     else:
         sys.exit(0)
