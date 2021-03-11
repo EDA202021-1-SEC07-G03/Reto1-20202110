@@ -94,7 +94,7 @@ def videos_tendencia_pais(catalog,pais):
                 dates[info]=lt.newList('ARRAY_LIST')
                 lt.addLast(dates[info],date)
             else:
-                lt.addLast(dates[titulo+';;'+channel+';;'+country],date)
+                lt.addLast(dates[info],date)
         j+=1
     for info in dates:
         if lt.size(dates[info])>mayor:
