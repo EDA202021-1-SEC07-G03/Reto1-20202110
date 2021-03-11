@@ -149,7 +149,7 @@ def videos_pais_tag(catalog,pais,tag,cantidad):
         list_tags1=str_tags_clean1.split('|')
         list_tags2=str_tags_clean2.split()
         list_tags3 = list_tags1 + list_tags2
-        if  (pais in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and lt.isPresent(titles,(lt.getElement(sub_list, i)['title']))!=0:
+        if  (pais in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and lt.isPresent(titles,(lt.getElement(sub_list, i)['title']))==0:
             lt.addLast(subsub_list, lt.getElement(sub_list, i))
             lt.addLast(titles,lt.getElement(sub_list, i)['title'])
         i+=1
