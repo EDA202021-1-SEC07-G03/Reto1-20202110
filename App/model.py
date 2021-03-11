@@ -121,7 +121,7 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
                 dates[info]=lt.newList('ARRAY_LIST')
                 lt.addLast(dates[info],date)
             else:
-                lt.addLast(dates[titulo+';;'+channel+';;'+id_categoria],date)
+                lt.addLast(dates[info],date)
         j+=1
     for info in dates:
         if lt.size(dates[info])>mayor:
