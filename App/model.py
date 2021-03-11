@@ -70,7 +70,7 @@ def videos_pais_categoria(catalog,pais,nombre_categoria,n):
     sub_list=lt.newList('ARRAY_LIST')
     j=1
     while j <  (lt.size(catalog['videos'])):
-        if (pais in (lt.getElement(catalog['videos'], j)['country'].lower())) and (id_categoria in (lt.getElement(catalog['videos'], j)['category_id'])):
+        if (pais in (lt.getElement(catalog['videos'], j)['country'].lower())) and (id_categoria == (lt.getElement(catalog['videos'], j)['category_id'])):
             lt.addLast(sub_list, lt.getElement(catalog['videos'], j))
         j+=1
 
