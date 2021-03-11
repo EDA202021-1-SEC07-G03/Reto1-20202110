@@ -134,7 +134,7 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
     return trend
 def videos_pais_tag(catalog,pais,tag,cantidad):
     i=0
-    titles=[]
+    titles=lt.newList('ARRAY_LIST')
     sub_list= mrg.sort(catalog['videos'],cmpVideosbyLikes)
     sub_list = sub_list.copy()
 
@@ -149,14 +149,12 @@ def videos_pais_tag(catalog,pais,tag,cantidad):
         list_tags1=str_tags_clean1.split('|')
         list_tags2=str_tags_clean2.split()
         list_tags3 = list_tags1 + list_tags2
-        if  (pais in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and (lt.getElement(sub_list, i)['title']) not in titles:
+        if  (pais in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and lt.isPresent(titles,(lt.getElement(sub_list, i)['title']))!=0:
             lt.addLast(subsub_list, lt.getElement(sub_list, i))
-            titles.append(lt.getElement(sub_list, i)['title'])
-        
+            lt.addLast(titles,lt.getElement(sub_list, i)['title'])
         i+=1
 
     subsub_list = lt.subList(subsub_list, 1, cantidad)
-    subsub_list = subsub_list.copy()
     return subsub_list
 
 # Funciones de comparacion
