@@ -81,6 +81,6 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
 def videos_tendencia_pais(catalog,pais):
     return model.videos_tendencia_pais(catalog,pais)
 
-def videos_pais_tag(catalog,pais2,tag,cantidad):
-    subsub_list= model.videos_pais_tag(catalog,pais2,tag,cantidad)
+def videos_pais_tag(catalog,pais,tag,cantidad):
+    subsub_list= model.videos_pais_tag(catalog,pais,tag,cantidad)
     return subsub_list

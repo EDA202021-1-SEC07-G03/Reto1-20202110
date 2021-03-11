@@ -144,20 +144,20 @@ while True:
 
 
     elif int(inputs)==5:
-        pais2=(str(input('Digite el pais de su interes: ')).lower())
+        pais=(str(input('Digite el pais de su interes: ')).lower())
         tag=(str(input('Digite el tag de su interes: ')).lower())
         cantidad= int(input('Indique la cantidad de videos que desea recibir: '))
-        subsub_list= controller.videos_pais_tag(catalog,pais2,tag,cantidad)
+        subsub_list= controller.videos_pais_tag(catalog,pais,tag,cantidad)
         i=0
         while i < (lt.size(subsub_list)):
             print('VIDEO ' +str(i+1)+ ' : '+
-            ('Title: '+ str(subsub_list['elements'][i]['title'])+
-            ' , Channel title: ' + str(subsub_list['elements'][i]['channel_title'])+ 
-            ' , Publish time: ' + str(subsub_list['elements'][i]['publish_time'])+ 
-            ' , Views: ' + str(subsub_list['elements'][i]['views'])+
-            ' , Likes: '+ str(subsub_list['elements'][i]['likes'])+
-            ' , Dislikes: '+ str(subsub_list['elements'][i]['dislikes'])+
-            ' , Tags: '+str(subsub_list['elements'][i]['tags'])))
+            ('Title: '+ str(lt.getElement(subsub_list,i)['title'])+
+            ' , Channel title: ' + str(lt.getElement(subsub_list,i)['channel_title'])+ 
+            ' , Publish time: ' + str(lt.getElement(subsub_list,i)['publish_time'])+ 
+            ' , Views: ' + str(lt.getElement(subsub_list,i)['views'])+
+            ' , Likes: '+ str(lt.getElement(subsub_list,i)['likes'])+
+            ' , Dislikes: '+ str(lt.getElement(subsub_list,i)['dislikes'])+
+            ' , Tags: '+str(lt.getElement(subsub_list,i)['tags'])))
             i+=1
 
         

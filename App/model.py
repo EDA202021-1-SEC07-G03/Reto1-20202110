@@ -152,7 +152,7 @@ def videos_tendencia_categoria (catalog, nombre_categoria):
             trend['category id']=i[2]
             trend['days']=mayor
     return trend
-def videos_pais_tag(catalog,pais2,tag,cantidad):
+def videos_pais_tag(catalog,pais,tag,cantidad):
     i=0
     titles=[]
     sub_list= mrg.sort(catalog['videos'],cmpVideosbyLikes)
@@ -160,7 +160,6 @@ def videos_pais_tag(catalog,pais2,tag,cantidad):
 
     subsub_list=lt.newList('ARRAY_LIST')
     while i <  (lt.size(sub_list)):
-        
         str_tags= lt.getElement(sub_list, i)['tags']
         str_tags_clean1= str_tags.replace('"','')
         str_tags_clean1= str_tags_clean1.replace('(','')
@@ -170,7 +169,7 @@ def videos_pais_tag(catalog,pais2,tag,cantidad):
         list_tags1=str_tags_clean1.split('|')
         list_tags2=str_tags_clean2.split()
         list_tags3 = list_tags1 + list_tags2
-        if  (pais2 in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and (lt.getElement(sub_list, i)['title']) not in titles:
+        if  (pais in (lt.getElement(sub_list, i)['country']).lower()) and (tag in list_tags3) and (lt.getElement(sub_list, i)['title']) not in titles:
             lt.addLast(subsub_list, lt.getElement(sub_list, i))
             titles.append(lt.getElement(sub_list, i)['title'])
         
@@ -178,9 +177,6 @@ def videos_pais_tag(catalog,pais2,tag,cantidad):
 
     subsub_list = lt.subList(subsub_list, 1, cantidad)
     subsub_list = subsub_list.copy()
-
-   
-
     return subsub_list
 
 
